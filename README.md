@@ -5,7 +5,10 @@
 This document was create initally as notes to Mosh Hamedani's Udemi [Course](https://dftadst.udemy.com/course-dashboard-redirect/?course_id=1496348 "Unit Testing for C# Developers").
 A more detailed explanation and the project can be found in its course, from which these examples are taken from.
 
-the structure of project is based on the class we want to test using the conventional name : `ClassName.cs`
+The structure of project can be symplified in the following picture
+![alt text](https://github.com/PaolaDMadd-dft/UnitTest_Exercises/blob/main/project%20structure.png "Project structure and conventional naming")
+
+is based on the class we want to test using the conventional name : `ClassName.cs`
 the test
 
 ##### 3 ways of implementing dependecy injections:
