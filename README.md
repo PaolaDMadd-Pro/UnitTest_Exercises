@@ -131,9 +131,9 @@ in the `program` file we need to remove the parameter(from the previous example)
     }
  ```
 as well as in `VideoServiceTests` file and we need to initialize the file reader property with a "fake" property 
-in our case we created a class in our UnitTests project called `FakeFileReader`, as follows:
+in our case we created a class in our UnitTests project called `FakeFileReader` (by name convention can be named Stub or Fake or Mock + interface name), as follows:
 ```
-public class FakeFileReader : IFileReader //by  convention can be named Stub or Fake or Mock + interface name
+public class FakeFileReader : IFileReader 
     {
         public string Read(string path)
         {
