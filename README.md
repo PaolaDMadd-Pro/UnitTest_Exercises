@@ -2,26 +2,53 @@
 
 # Dependency injection and Unit Testing
 
+### Premise: What to expect.
+
 This document was create initally as notes to Mosh Hamedani's Udemi [Course](https://dftadst.udemy.com/course-dashboard-redirect/?course_id=1496348 "Unit Testing for C# Developers").
-A more detailed explanation and the project can be found in its course, from which these examples are taken from.
+A more detailed explanation and the whole project can be found in its course, from which these examples are taken.
 
-The structure of project can be symplified in the following picture
-![alt text](https://github.com/PaolaDMadd-dft/UnitTest_Exercises/blob/main/project%20structure.png "Project structure and conventional naming")
+For convinience here I will follow the structure of project used by Mosh in its course that can be symplified in the following picture
+![alt text](https://github.com/PaolaDMadd-dft/UnitTest_Exercises/blob/main/project%20structure.png "Project structure and conventional naming").
 
-is based on the class we want to test using the conventional name : `ClassName.cs`
-the test
+### Bearing in mind the conventional naming rules:
 
-##### 3 ways of implementing dependecy injections:
+1) if in the app the class is called `ClassName.cs`, in the unit testing we will have a file named afer `ClassNameTests.cs`
+2) the project folder will follow the same reule eg, `AppName` => `AppName.UnitTest`.
+3) the tests are always `public void` methods and are named as follows : `MethodName_Scenario_ExpectedBehavior`.
+   -**Note:**A void function is a command function because it perfomrs an action. It's aimed to check that the state of an object in memory changes, it may also mean that the value of one or more property change.
+4) the test body follows the **Triple 'A'** structure:
+    - Arrange: is where we initalize the object
+    - Act: is the action/method we are going to test
+    - Assert: is the test and the expected behaviour 
+
+5) NUnit Framework uses the following decorations:
+    - `[TestFixture]` => applied to the Class itself
+    - `[SetUp]` => applied to the SetUp method before the tests methods
+    - `[Test]` => applies to the method we are testing, it's the test itself.
+    optional
+    - `[TestCase]` => a cleaner way to write tests with different results is making it generic. This technique is called **Parameterize**.
+    - `[Ignore("testing usage of Ignore decoration")]` => to tell the machine to ingore the test, this is used instead of cancel or comment out a test, so to not ferget.(the test will appeare as skipped)
+
+
+### Ways of inject dependency
+This document will walk you through some practical examples on different types of dependecy injection, how to inject them and the way these can be unit tested.
+
+There are three ways to implement dependency injections:
 
 1. via method parameter
 2. via constructors
 3. via properties
 
-
+Sometimes the choice of which type of inejction to use can be technical: for example some frameworks do or do not accept injection via property.
+Or if the signature of a method using a parameter injection changes, the code breaks unless it will be modified in the rest of the code.
+Other times it depends on the architecture of the app or the team prerefences, in this case our flexibility is the clue. 
+Let's see these in detail.
 
 ##### 1. Method Parameter
 
-in `VideoService.cs` file
+The first approach is using a method parameter:
+
+in `VideoService.cs` file (app file)
 ``` 
  public string ReadVideoTitle(IFileReader fileReader)
         {
@@ -48,8 +75,9 @@ But in real life we don't initialize new fileReader, we inject the framework ins
 ```
 
 
-in the `unitTest project`we recreate the same structure as the app project (in our case, adding the mocking folder)
-we also create a class `videoServiceTests` here we will implement a mock function as follows:
+in the `unitTest project`we recreate the same structure as the app project for consistency.
+In Mosh project we have a folder called "Mocking" so we create a class `videoServiceTests.cs` in it. 
+Here we will implement a mock function as follows:
 
 ```
     [TestFixture]
@@ -67,19 +95,17 @@ we also create a class `videoServiceTests` here we will implement a mock functio
 ```
 
 **N.B.** 
-This method has some challenges, for example if you need to modify its signature will change,
-this means that we need to make the change in all other places it's been used.
+This method has some challenges, for example if its signature changes, the modifications need to be done in all other places it's been used.
 Also some injection framework can not inject methods via parameters.
-So this approach requires to take into count 
+So this approach requires to take into counts:
  
 - If it's allowed by the framework used in the app.
 - How many times the method you're using is present in your app.
-<br/>
-<br/>
+
 
 ##### 2. Property
 
-The second apprach is using property and inintialize it, with a construstor as follows:
+The second approach is via property and is inintialized with a constructor :
 in `VideoService.cs` file 
 ``` 
     public IFileReader FileReader { get; set; }
@@ -138,7 +164,7 @@ public class FakeFileReader : IFileReader //by  convention can be named Stub or 
 <br/>
 
 ##### 3. Constructor
-Another alternaive to the firts two methids is the injection of a dependecy via a constuctor parameteter,
+Another alternaive to the first two methods is the injection of a dependecy via a constuctor parameter,
 as follows:
 
 in `videoService` file
@@ -154,8 +180,8 @@ public class VideoService
         }
     }
 ```
-Note, that this field needs to be private and by convention the naming will start by unserscore.
-If we are modify an existing code this latter implementation myght break the code in other spots.
+Note, that this field needs to be private and by convention the naming will start with the underscore character.
+If we are modify an existing code this latter implementation might break the code in other spots.
 A better alernative is to create a default constructor that doesn't take a parameter, like this:
 
 ```
@@ -174,9 +200,9 @@ A better alernative is to create a default constructor that doesn't take a param
     }
 ``` 
 
-A further improvement to this code can be to combine into one in two steps
+A further improvement to this code can be to combine into one these two steps:
 1. set the parameter as null by default
-2. set the `_filereader` private field using a ternary conditional operator (in this case null-coalescing operator).
+2. set the `_filereader` private field using a ternary conditional operator (more precisely a null-coalescing operator).
 
 ```
  public class VideoService
@@ -191,8 +217,10 @@ A further improvement to this code can be to combine into one in two steps
    }
 ```
 Setting the parameter as null by default will make the method work where no parameter are passed.
-Using the ternary conditional operator will set the `_filereader` private field as the parameter received or if null, 
-it will be initialized.
+Using the ternary conditional operator will set the `_filereader` private field 
+as the parameter received 
+or 
+if null, it will be initialized.
 
 We also need to change the `VideoServiceTest` file like this:
 ```
@@ -208,25 +236,20 @@ We also need to change the `VideoServiceTest` file like this:
 
             Assert.That(result, Does.Contain("Error").IgnoreCase);
         }
-
     }
 ```
 **N.B.** using the null-coalescing operator can be a solution but is not used in the real world, 
-because this class might have more dependencies in that case this expression will be repeated over and over.
+because this class might have more dependencies. In that case this expression will be repeated over and over.
 But above of all in real world the null parameter is not a good practice. 
-This latter approach is defined as " poorman's dependency injection".
+This latter approach is defined as ***"poorman's dependency injection".***
 In real life application, the best solution will be to use a framework injection.
 
-<!-- visible breakline is " __ __" 2underscore1whitespace2underscore--> 
-<!-- breakline is simple html <br/> tag-->
-<br/>
-
-##### Bonus: Framework injection
+### Bonus: Framework injection
 
 A dependency injection framework will take care of creating and initializing object at run time.
 There are various framework you can choose from: NInject, StructureMap, Spring.NET, Autofac, Unity.
 They all have the same principles:
-A container which is a registry of all interfaces and implementations.
+A container which is a registry of all interfaces and implementations. __(add picture)__
 When the application starts, it will take care of creating object graphs based on the interfaces and types registered in the container.
 Using the same principle with **Mocking Isolation Framework**, we can create dynamically mock objects as part of the tests' suit,
 and more important we can program them to behave the way we want. Eg. returning a value, throw an exception, raise an events. 
@@ -312,3 +335,11 @@ Certainly if we need to use the framework for more than one test we might want t
     }
 ```
 
+### Main packages used:
+- Moq 
+- NUnit
+- NUnitTestAdapter
+
+
+<!-- visible breakline is " __ __" 2underscore1whitespace2underscore--> 
+<!-- breakline is simple html <br/> tag-->
