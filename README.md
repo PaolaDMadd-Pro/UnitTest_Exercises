@@ -14,7 +14,7 @@ For convinience here I will follow the structure of project used by Mosh in its 
 ### Bearing in mind the conventional naming and structure rules:
 
 1) If in the app the class is called `ClassName.cs`, in the unit testing folder we will have a file named after it `ClassNameTests.cs`.
-2) The project folder will follow the same reule eg, `AppName` => `AppName.UnitTest`.
+2) The project folder will follow the same rule eg, `AppName` => `AppName.UnitTest`.
 3) The tests are always `public void` methods and are named as follows : `MethodName_Scenario_ExpectedBehavior`.
     - **Note:** A void function is a command function because it perfomrs an action. It's aimed to check that the state of an object in memory changes, it may also mean that the value of one or more property change.
 4) The test body follows the **Triple 'A'** structure:
@@ -28,6 +28,8 @@ For convinience here I will follow the structure of project used by Mosh in its 
     optional
     - `[TestCase]` => a cleaner way to write tests with different results is making it generic. This technique is called **Parameterize**.
     - `[Ignore("testing usage of Ignore decoration")]` => to tell the machine to ingore the test, this is used instead of cancel or comment out a test, so to not ferget.(the test will be output as skipped).
+
+__ __
 
 ### Ways of inject dependency
 This document will walk you through some practical examples on different types of dependecy injection, how to inject them and the way these can be unit tested.
@@ -43,7 +45,7 @@ Or if the signature of a method using a parameter injection changes, the code br
 Other times it depends on the architecture of the app or the team prerefences, in this case our flexibility is the clue. 
 Let's see these in detail.
 
-##### 1. Method Parameter
+#### 1. Method Parameter
 
 The first approach is using a method parameter:
 
@@ -102,7 +104,7 @@ So this approach requires to take into counts:
 - How many times the method you're using is present in your app.
 
 
-##### 2. Property
+#### 2. Property
 
 The second approach is via property and is inintialized with a constructor :
 in `VideoService.cs` file 
@@ -162,7 +164,7 @@ public class FakeFileReader : IFileReader //by  convention can be named Stub or 
 <br/>
 <br/>
 
-##### 3. Constructor
+#### 3. Constructor
 Another alternaive to the first two methods is the injection of a dependecy via a constuctor parameter,
 as follows:
 
