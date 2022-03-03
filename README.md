@@ -1,7 +1,12 @@
-notes and examples
 
-### My Guide & Notes
-<br/>
+
+# Dependency injection and Unit Testing
+
+This document was create initally as notes to Mosh Hamedani's Udemi [Course](https://dftadst.udemy.com/course-dashboard-redirect/?course_id=1496348 "Unit Testing for C# Developers").
+A more detailed explanation and the project can be found in its course, from which these examples are taken from.
+
+the structure of project is based on the class we want to test using the conventional name : `ClassName.cs`
+the test
 
 ##### 3 ways of implementing dependecy injections:
 
@@ -9,8 +14,7 @@ notes and examples
 2. via constructors
 3. via properties
 
-<br/>
-<br/>
+
 
 ##### 1. Method Parameter
 
