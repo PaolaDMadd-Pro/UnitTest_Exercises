@@ -7,28 +7,28 @@
 This document was create initally as notes to Mosh Hamedani's Udemi [Course](https://dftadst.udemy.com/course-dashboard-redirect/?course_id=1496348 "Unit Testing for C# Developers").
 A more detailed explanation and the whole project can be found in its course, from which these examples are taken.
 
-For convinience here I will follow the structure of project used by Mosh in its course that can be symplified in the following picture
-![alt text](https://github.com/PaolaDMadd-dft/UnitTest_Exercises/blob/main/project%20structure.png "Project structure and conventional naming").
+For convinience here I will follow the structure of project used by Mosh in its course that can be symplified in the following picture.
+<br/>
+![alt text](https://github.com/PaolaDMadd-dft/UnitTest_Exercises/blob/main/project%20structure.png "Project structure and conventional naming")
 
-### Bearing in mind the conventional naming rules:
+### Bearing in mind the conventional naming and structure rules:
 
-1) if in the app the class is called `ClassName.cs`, in the unit testing we will have a file named afer `ClassNameTests.cs`
-2) the project folder will follow the same reule eg, `AppName` => `AppName.UnitTest`.
-3) the tests are always `public void` methods and are named as follows : `MethodName_Scenario_ExpectedBehavior`.
-   -**Note:**A void function is a command function because it perfomrs an action. It's aimed to check that the state of an object in memory changes, it may also mean that the value of one or more property change.
-4) the test body follows the **Triple 'A'** structure:
-    - Arrange: is where we initalize the object
-    - Act: is the action/method we are going to test
-    - Assert: is the test and the expected behaviour 
+    1) if in the app the class is called `ClassName.cs`, in the unit testing folder we will have a file named after it `ClassNameTests.cs`.
+    2) the project folder will follow the same reule eg, `AppName` => `AppName.UnitTest`.
+    3) the tests are always `public void` methods and are named as follows : `MethodName_Scenario_ExpectedBehavior`.
+       - **Note:**A void function is a command function because it perfomrs an action. It's aimed to check that the state of an object in memory changes, it may also mean that the value of one or more property change.
+    4) the test body follows the **Triple 'A'** structure:
+        - Arrange: is where we initalize the object
+        - Act: is the action/method we are going to test
+        - Assert: is the test and the expected behaviour 
 
-5) NUnit Framework uses the following decorations:
-    - `[TestFixture]` => applied to the Class itself
-    - `[SetUp]` => applied to the SetUp method before the tests methods
-    - `[Test]` => applies to the method we are testing, it's the test itself.
-    optional
-    - `[TestCase]` => a cleaner way to write tests with different results is making it generic. This technique is called **Parameterize**.
-    - `[Ignore("testing usage of Ignore decoration")]` => to tell the machine to ingore the test, this is used instead of cancel or comment out a test, so to not ferget.(the test will appeare as skipped)
-
+    5) NUnit Framework uses the following decorations:
+        - `[TestFixture]` => applied to the Class itself
+        - `[SetUp]` => applied to the SetUp method before the tests methods
+        - `[Test]` => applies to the method we are testing, it's the test itself.
+        optional
+        - `[TestCase]` => a cleaner way to write tests with different results is making it generic. This technique is called **Parameterize**.
+        - `[Ignore("testing usage of Ignore decoration")]` => to tell the machine to ingore the test, this is used instead of cancel or comment out a test, so to not ferget.(the test will be output as skipped).
 
 ### Ways of inject dependency
 This document will walk you through some practical examples on different types of dependecy injection, how to inject them and the way these can be unit tested.
@@ -248,8 +248,8 @@ In real life application, the best solution will be to use a framework injection
 
 A dependency injection framework will take care of creating and initializing object at run time.
 There are various framework you can choose from: NInject, StructureMap, Spring.NET, Autofac, Unity.
-They all have the same principles:
-A container which is a registry of all interfaces and implementations. __(add picture)__
+They all based on the same principles:
+A container which is a registry of all interfaces and implementations. _(add picture)_
 When the application starts, it will take care of creating object graphs based on the interfaces and types registered in the container.
 Using the same principle with **Mocking Isolation Framework**, we can create dynamically mock objects as part of the tests' suit,
 and more important we can program them to behave the way we want. Eg. returning a value, throw an exception, raise an events. 
