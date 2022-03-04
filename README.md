@@ -250,7 +250,10 @@ A dependency injection framework will take care of creating and initializing obj
 There are various framework you can choose from: NInject, StructureMap, Spring.NET, Autofac, Unity.
 They all based on the same principles:
 A container which is a registry of all interfaces and implementations.
-![alt text](https://github.com/PaolaDMadd-dft/UnitTest_Exercises/blob/main/Framework%20injection%20principles.png "Framework Injection Framewok") <br/>
+<p align="center">
+  <img src="https://github.com/PaolaDMadd-dft/UnitTest_Exercises/blob/main/Framework%20injection%20principles.png" alt="Injection Framewok Schema" />
+</p>
+
 When the application starts, it will take care of creating [object graphs](https://en.wikipedia.org/wiki/Object_graph) based on the interfaces and types registered in the container.
 Using the same principle with **Mocking Isolation Framework**, we can create dynamically mock objects as part of the tests' suit,
 and more important we can program them to behave the way we want. Eg. returning a value, throw an exception, raise an events. 
