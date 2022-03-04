@@ -102,7 +102,7 @@ So this approach requires to take into counts:
  
 - If it's allowed by the framework used in the app.
 - How many times the method you're using is present in your app.
-
+<br/>
 
 #### 2. Property
 
@@ -161,7 +161,6 @@ public class FakeFileReader : IFileReader
 ```
 
 **N.B.** some Framework doesn't accept injections via properties.
-<br/>
 <br/>
 
 #### 3. Constructor
@@ -250,7 +249,8 @@ In real life application, the best solution will be to use a framework injection
 A dependency injection framework will take care of creating and initializing object at run time.
 There are various framework you can choose from: NInject, StructureMap, Spring.NET, Autofac, Unity.
 They all based on the same principles:
-A container which is a registry of all interfaces and implementations. _(add picture)_ <br/>
+A container which is a registry of all interfaces and implementations.
+![alt text](https://github.com/PaolaDMadd-dft/UnitTest_Exercises/blob/main/Framework%20injection%20principles.png "Framework Injection Framewok") <br/>
 When the application starts, it will take care of creating object graphs based on the interfaces and types registered in the container.
 Using the same principle with **Mocking Isolation Framework**, we can create dynamically mock objects as part of the tests' suit,
 and more important we can program them to behave the way we want. Eg. returning a value, throw an exception, raise an events. 
