@@ -336,7 +336,7 @@ Certainly if we need to use the framework for more than one test we might want t
     }
 ```
 
-read more about [Triple A structure](https://en.wikipedia.org/wiki/Object_graph)
+read more about [Triple A structure](https://github.com/PaolaDMadd-dft/UnitTest_Exercises/blob/main/TripleA_Structure.md)
 
 
 ### Main packages used:

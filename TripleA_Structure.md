@@ -1,36 +1,29 @@
  ### Triple 'A' Test structure and test methods name conventions:
 
 Here few basic rules:
-1. Syntax
-- I public void
-    - A testing method is always void.
-- II name contains the methodname we want to test + scenario + expected behaviour.
-    -  methodNameWewantToTest_Scenario_Expectedbehavior()
 
-2. Arrange, Act, Assert 
-- this is the structure that follows the testing method body 
+ ### Syntax 
+ I. public void\
+            A testing method is always void.
+II. name contains the methodname we want to test + scenario + expected behaviour.
+    As follow: methodNameWewantToTest_Scenario_Expectedbehavior()
+
+### Arrange, Act, Assert 
+Here below the structure that follows the testing method body 
 
         [Test]
         public void CanBeCancelledBy_UserIsAdmin_ReturnsTrue()
         {
-            //Arrange is where we initalize the object
+            var reservation = new Reservation(); //Arrange is where we initalize the object
 
-            var reservation = new Reservation();
+            var result = reservation.CanBeCancelledBy(new User{IsAdmin = true }); //Act the method we are going to test
 
-            //Act the method we are going to test
-
-            var result = reservation.CanBeCancelledBy(new User{IsAdmin = true });
-
-            //Assert 
-            Assert.IsTrue(result);
-            //can be wtritten also in 2 other ways:
-
-            //Assert.That(result, Is.True);
-            //Assert.That(result == true);
-
+           
+            Assert.IsTrue(result);  //Assert 
         }
 
 Depending on what we want to test we might adopt a different approach.
+
 ###### State Based testing
 The above code is also known as **State-Based testing** because we test the state changes of the applications.
 
@@ -89,4 +82,4 @@ We are programming the mock object with `storage.Verify(s => s.Store(order));`.\
 In order to test the interaction between 2 objects we use the `.Verify()` method of mock object.
 In this way we are testing if any given method is called with the right arguments or not.
 
-#### wants more? read also [Dependency Injection](https://en.wikipedia.org/wiki/Object_graph)
+#### wants more? read also [Dependency Injection](https://github.com/PaolaDMadd-dft/UnitTest_Exercises)
