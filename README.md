@@ -9,7 +9,7 @@ A more detailed explanation and the whole project can be found in its course, fr
 
 For convinience here I will follow the structure of project used by Mosh in its course that can be symplified in the following picture.
 <br/>
-![alt text](https://github.com/PaolaDMadd-dft/UnitTest_Exercises/blob/main/project%20structure.png "Project structure and conventional naming")
+![alt text](https://raw.githubusercontent.com/PaolaDMadd-dft/UnitTest_Exercises/main/project%20structure.png "Project structure and conventional naming")
 
 ### Bearing in mind the conventional naming and structure rules:
 
