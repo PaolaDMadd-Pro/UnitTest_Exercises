@@ -251,7 +251,7 @@ There are various framework you can choose from: NInject, StructureMap, Spring.N
 They all based on the same principles:
 A container which is a registry of all interfaces and implementations.
 <p align="center">
-  <img src="https://github.com/PaolaDMadd-dft/UnitTest_Exercises/blob/main/Framework%20injection%20principles.png" alt="Injection Framewok Schema" />
+  <img src="https://raw.githubusercontent.com/PaolaDMadd-dft/UnitTest_Exercises/main/Framework%20injection%20principles.png" alt="Injection Framewok Schema" />
 </p>
 
 When the application starts, it will take care of creating [object graphs](https://en.wikipedia.org/wiki/Object_graph) based on the interfaces and types registered in the container.
